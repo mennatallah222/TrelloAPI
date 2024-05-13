@@ -1,3 +1,4 @@
+package Entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +22,16 @@ public class Board  implements Serializable{
 	 @JoinColumn(name = "userId")
 	 private User owner;
 	 
-	 public Board() {}
- 
-     
-     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
      public List<Lists> lists;
      
+     
+     @ManyToOne(fetch=FetchType.EAGER)
+     @JoinColumn(name="sprintId")
+     private Sprint sprint;
+
+     
+     public Board() {}
      public Long getBoardId() {
     	 return boardId;
      }
